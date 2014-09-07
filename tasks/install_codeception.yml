@@ -4,9 +4,14 @@
   file: path=/opt/codeception owner=root group=root state=directory
   sudo: yes
 
+- name: Check for existence of git repo
+  stat: path=/opt/codeception/.git
+  register: cc_git
+
 - name: Empty directory if not using git version of codeception yet
-  shell: "bash -c '[ -d /opt/codeception/.git ] || rm -rf /opt/codeception/*'"
+  shell: rm -rf /opt/codeception/*
   sudo: yes
+  when: cc_git.stat.isdir is not defined or cc_git.stat.isdir == false
 
 - name: Download codeception
   git:
@@ -14,11 +19,16 @@
     dest=/opt/codeception
     version=5b2448d48ce56f744077a83195fc92c73cc7ebeb
   sudo: yes
+  register: cc_checkout
+
+- name: Check for codeception composer lock
+  stat: path=/opt/codeception/composer.lock
+  register: cc_lock
 
 - name: Install codeception dependencies
-  # Update seems to be necessary for some reason
-  shell: composer update --prefer-dist --working-dir=/opt/codeception
+  shell: composer install --prefer-dist --working-dir=/opt/codeception
   sudo: yes
+  when: (not cc_lock.stat.exists) or cc_checkout.changed
 
 - name: Create symlink
   file: src=/opt/codeception/codecept dest=/usr/local/bin/codecept state=link
