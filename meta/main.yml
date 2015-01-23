@@ -12,3 +12,4 @@ galaxy_info:
 dependencies:
   - { role: composer }
   - { role: dev-tools }
+  - { role: node }

@@ -1,0 +1,5 @@
+---
+
+- name: install Phantomas
+  npm: name=phantomas global=yes
+  sudo: yes
