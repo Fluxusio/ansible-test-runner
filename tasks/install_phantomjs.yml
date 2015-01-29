@@ -5,12 +5,14 @@
     path=/opt/phantomjs
     state=directory
     mode=0755
+  sudo: yes
 
 - name: Download compiled PhantomJS binary
   get_url:
     url=http://github.com/Fluxusio/binaries/raw/master/phantomjs-2.0-alpha
     dest=/opt/phantomjs/phantomjs-2.0-alpha
     mode=0755
+  sudo: yes
 
 - name: Install PhantomJS's dependencies
   apt: name={{ item }} state=present
