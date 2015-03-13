@@ -17,7 +17,7 @@
   git:
     repo=https://github.com/Codeception/Codeception.git
     dest=/opt/codeception
-    version=5b2448d48ce56f744077a83195fc92c73cc7ebeb
+    version=2b830bc169714639f3c3320cedf3729969d6733a
   sudo: yes
   register: cc_checkout
 
