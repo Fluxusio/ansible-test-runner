@@ -13,3 +13,4 @@ dependencies:
   - { role: composer }
   - { role: dev-tools }
   - { role: node }
+  - { role: docker }
