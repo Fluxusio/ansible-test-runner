@@ -1,7 +1,16 @@
 ---
 
 - include: install_behat.yml
+  when: 'behat' in tools
+
 - include: install_codeception.yml
+  when: 'codeception' in tools
+
 - include: install_phantomjs.yml
+  when: 'phantomjs' in tools
+
 - include: install_phantomas.yml
+  when: 'phantomas' in tools
+
 - include: install_wraith.yml
+  when: 'wraith' in tools
