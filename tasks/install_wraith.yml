@@ -1,14 +1,4 @@
 ---
-
-- name: Install Wraith's dependencies
-  apt: name={{ item }} state=present install_recommends=no update_cache=yes cache_valid_time=3600
-  with_items:
-    - libicu-dev
-    - imagemagick
-    - rake
-    - ruby-dev
-  sudo: yes
-
-- name: Install Wraith gem
-  command: gem install wraith
+- name: Pull the bbcnews/wraith image
+  shell: docker pull bbcnews/wraith
   sudo: yes
